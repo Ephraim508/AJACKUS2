@@ -35,8 +35,8 @@ const EditModal = ({ user, closeModal, onSave }) => {
       return;
     }
     try {
-      onSave(editUser); 
-      closeModal(); 
+      onSave(editUser);
+      closeModal();
     } catch {
       toast.error("Error saving user data!");
     }
@@ -53,14 +53,7 @@ const EditModal = ({ user, closeModal, onSave }) => {
           value={editUser.FirstName}
           onChange={handleChange}
         />
-        {errors.FirstName && (
-          <p
-            className="error"
-            style={{ color: "red", fontFamily: "Times-romans" }}
-          >
-            {errors.FirstName}
-          </p>
-        )}
+        {errors.FirstName && <p className="error" style={{color:"red",fontFamily:"times-romans"}}>{errors.FirstName}</p>}
 
         <label>Last Name:</label>
         <input
@@ -69,14 +62,8 @@ const EditModal = ({ user, closeModal, onSave }) => {
           value={editUser.SecondName}
           onChange={handleChange}
         />
-        {errors.SecondName && (
-          <p
-            className="error"
-            style={{ color: "red", fontFamily: "Times-romans" }}
-          >
-            {errors.SecondName}
-          </p>
-        )}
+        {errors.SecondName && <p className="error" style={{color:"red",fontFamily:"times-romans"}}>{errors.SecondName}</p>}
+
         <label>Email:</label>
         <input
           type="email"
@@ -84,14 +71,8 @@ const EditModal = ({ user, closeModal, onSave }) => {
           value={editUser.Email}
           onChange={handleChange}
         />
-        {errors.Email && (
-          <p
-            className="error"
-            style={{ color: "red", fontFamily: "Times-romans" }}
-          >
-            {errors.Email}
-          </p>
-        )}
+        {errors.Email && <p className="error" style={{color:"red",fontFamily:"times-romans"}}>{errors.Email}</p>}
+
         <label>Department:</label>
         <input
           type="text"
@@ -99,14 +80,7 @@ const EditModal = ({ user, closeModal, onSave }) => {
           value={editUser.Department}
           onChange={handleChange}
         />
-        {errors.Department && (
-          <p
-            className="error"
-            style={{ color: "red", fontFamily: "Times-romans" }}
-          >
-            {errors.Department}
-          </p>
-        )}
+        {errors.Department && <p className="error" style={{color:"red",fontFamily:"times-romans"}}>{errors.Department}</p>}
 
         <button onClick={handleSave} className="save-btn">
           Save
@@ -126,6 +100,7 @@ const AddUserModal = ({ closeModal, onAddUser }) => {
     Email: "",
     Department: "",
   });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -136,12 +111,13 @@ const AddUserModal = ({ closeModal, onAddUser }) => {
     e.preventDefault();
     const validationErrors = validateUser(newUser);
     if (Object.keys(validationErrors).length > 0) {
-      return; // Don't proceed if validation fails
+      setErrors(validationErrors);
+      return;
     }
 
     try {
       onAddUser({ ...newUser, Id: Date.now() });
-      closeModal(); // Close the modal after adding user
+      closeModal();
     } catch {
       toast.error("Error adding user!");
     }
@@ -159,6 +135,7 @@ const AddUserModal = ({ closeModal, onAddUser }) => {
             value={newUser.FirstName}
             onChange={handleChange}
           />
+          {errors.FirstName && <p className="error" style={{color:"red",fontFamily:"times-romans"}}>{errors.FirstName}</p>}
 
           <label>Last Name:</label>
           <input
@@ -167,6 +144,8 @@ const AddUserModal = ({ closeModal, onAddUser }) => {
             value={newUser.SecondName}
             onChange={handleChange}
           />
+          {errors.SecondName && <p className="error" style={{color:"red",fontFamily:"times-romans"}}>{errors.SecondName}</p>}
+
           <label>Email:</label>
           <input
             type="email"
@@ -174,6 +153,8 @@ const AddUserModal = ({ closeModal, onAddUser }) => {
             value={newUser.Email}
             onChange={handleChange}
           />
+          {errors.Email && <p className="error" style={{color:"red",fontFamily:"times-romans"}}>{errors.Email}</p>}
+
           <label>Department:</label>
           <input
             type="text"
@@ -181,6 +162,8 @@ const AddUserModal = ({ closeModal, onAddUser }) => {
             value={newUser.Department}
             onChange={handleChange}
           />
+          {errors.Department && <p className="error" style={{color:"red",fontFamily:"times-romans"}}>{errors.Department}</p>}
+
           <button type="submit" className="add-user-btn">
             Add User
           </button>
@@ -213,7 +196,7 @@ const Home = () => {
 
   const handleEdit = (user) => {
     setSelectedUser(user);
-    setIsModalOpen(true); // Open the modal for editing
+    setIsModalOpen(true);
   };
 
   const handleSave = (updatedUser) => {
@@ -226,8 +209,8 @@ const Home = () => {
     toast.success("User added successfully!");
   };
 
-  const closeModal = () => setIsModalOpen(false); // Close the EditModal
-  const closeAddModal = () => setIsAddModalOpen(false); // Close the AddUserModal
+  const closeModal = () => setIsModalOpen(false);
+  const closeAddModal = () => setIsAddModalOpen(false);
 
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
@@ -287,7 +270,7 @@ const Home = () => {
           <button
             key={index}
             onClick={() => handlePageChange(index + 1)}
-            className={currentPage === index + 1 ? "active-page" : "no-active"}
+            className={currentPage === index + 1 ? "active-page" : ""}
           >
             {index + 1}
           </button>
