@@ -18,6 +18,7 @@ const validateUser = (user) => {
   if (!user.Department.trim()) errors.Department = "Department is required.";
   return errors;
 };
+//modal
 
 const EditModal = ({ user, closeModal, onSave }) => {
   const [editUser, setEditUser] = useState(user);
@@ -92,6 +93,7 @@ const EditModal = ({ user, closeModal, onSave }) => {
     </div>
   );
 };
+//addusermodal
 
 const AddUserModal = ({ closeModal, onAddUser }) => {
   const [newUser, setNewUser] = useState({
