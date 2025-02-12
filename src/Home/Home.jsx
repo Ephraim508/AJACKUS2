@@ -9,7 +9,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Home.css";
-
+//validateUser Details
 const validateUser = (user) => {
   const errors = {};
   if (!user.FirstName.trim()) errors.FirstName = "First name is required.";
